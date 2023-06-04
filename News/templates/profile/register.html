@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load cache %}
+{% block content %}
+
+{% cache 600000 log %}
+<div id="colorlib-main" style="margin-top: 100px">
+    <div class="colorlib-blog">
+        <div class="col-md-2 animate-box">
+        </div>
+        <div class="col-md-7 animate-box">
+            <div class="form-group">
+                <a href="{% url 'login' %}"><input type="submit" value="Login" class="btn btn-primary" style="float: right"></a>
+            </div>
+            <h2 class="heading-2">Register</h2>
+            <form method="post">
+
+                <div class="row form-group">
+                    {% for f in form %}
+                    {% csrf_token %}
+
+                    <div class="col-md-12">
+                        {{f}}
+                    </div>
+                    <div class="form-error">{{ f.errors}}</div>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                     <input type="submit" value="Register" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endcache %}
+{% endblock %}

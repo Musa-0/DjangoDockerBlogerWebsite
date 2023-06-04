@@ -1,0 +1,94 @@
+{% load static %}
+{% load postview_tag %}
+{% load cache %}
+{% cache 6000 rnav %}
+<div class="col-md-3 sticky-parent">
+    <div class="sidebar" id="sticky_item">
+        <div class="side animate-box">
+            <div class="form-group">
+                <form action="{% url 'post_search' %}" method="get">
+                    <input type="text" name="search" class="form-control" id="search" placeholder="Enter to search...">
+                    <button type="submit" class="btn submit btn-primary"><i class="icon-search3"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="side animate-box">
+            <h2 class="sidebar-heading">Categories</h2>
+            <p>
+            <ul class="category">
+                {% get_category as cat %}
+                {% for category in cat %}
+                <li><a href="{{ category.get_absolute_url }}"><i class="icon-check"></i>{{category.name}}</a></li>
+                {% endfor %}
+            </ul>
+            </p>
+        </div>
+        <!--  недавние посещенияяяяя    <div class="side animate-box">-->
+        <!--                            <h2 class="sidebar-heading">Recent Blog</h2>-->
+        <!--                            <div class="f-blog">-->
+        <!--                                <a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">-->
+        <!--                                </a>-->
+        <!--                                <div class="desc">-->
+        <!--                                    <h3><a href="blog.html">Be a designer</a></h3>-->
+        <!--                                    <p class="admin"><span>25 March 2018</span></p>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                            <div class="f-blog">-->
+        <!--                                <a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">-->
+        <!--                                </a>-->
+        <!--                                <div class="desc">-->
+        <!--                                    <h3><a href="blog.html">How to build website</a></h3>-->
+        <!--                                    <p class="admin"><span>24 March 2018</span></p>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                            <div class="f-blog">-->
+        <!--                                <a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">-->
+        <!--                                </a>-->
+        <!--                                <div class="desc">-->
+        <!--                                    <h3><a href="blog.html">Create website</a></h3>-->
+        <!--                                    <p class="admin"><span>23 March 2018</span></p>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <div class="side animate-box">
+            <h2 class="sidebar-heading">Instagram</h2>
+            <div class="instagram-entry">
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-1.jpg' %});">
+                </a>
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-2.jpg' %});">
+                </a>
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-3.jpg' %});">
+                </a>
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-4.jpg' %});">
+                </a>
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-5.jpg' %});">
+                </a>
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-6.jpg' %});">
+                </a>
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-7.jpg' %});">
+                </a>
+                <a href="#" class="instagram text-center"
+                   style="background-image: url({% static 'images/gallery-8.jpg' %});">
+                </a>
+            </div>
+        </div>
+        <div class="side animate-box">
+            <div class="form-group">
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <input type="text" name="email" class="form-control form-email text-center" id="email"
+                           placeholder="Enter your email">
+                    <button type="submit" class="btn btn-primary btn-subscribe">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcache rnav %}

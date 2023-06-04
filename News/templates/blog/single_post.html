@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="colorlib-main">
+    <div class="colorlib-blog">
+        <div class="container-wrap">
+            <div class="row">
+
+                <div class="col-md-9">
+                    <div class="content-wrap">
+                        <article class="animate-box">
+                            <div class="blog-img" style="background-image: url({{post.image.url}});"></div>
+                            <div class="desc">
+                                <div class="col-md-2">
+                                <div class="meta">
+                                    <p>
+                                        <a href="{{ post.category.get_absolute_url }}"><span>{{ post.category }}</span></a>
+                                        <span>{{ post.create_at|date:"d M Y" }}</span>
+                                        <span><img style="width: 50px; height: 50px; border-radius: 50%;" src="{{ post.author.avatar.url }}"><a style="margin-left: 10px;" href="{{post.author.get_absolute_url}}">   {{ post.author }}</a></span>
+                                    </p>
+                                </div>
+                                </div>
+                                <div class="col-md-10">
+                                <h2><a href="single.html">{{post.name}}</a></h2>
+                                <p>{{post.text}}</p>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="row row-bottom-padded-md" id="tolchok" style="padding-left: 30px;">
+                            <!--надо убрать стиль так как в css уже есть толчок-->
+                            <div class="col-md-12 animate-box" style="margin-top: 100px;">
+                                <h2 class="heading-2">{{ post.get_comment.count }} Comments</h2>
+                                {% for comment in post.get_comment %}
+                                <div class="review">
+                                    <div class="user-img"
+                                         style="background-image: url({{ comment.image.avatar.url }})"></div>
+                                    <div class="desc">
+                                        <h4>
+                                            <a href={{comment.author.get_absolute_url}}"><span class="text-left">{{ comment.author }}</span></a>
+                                            <span class="text-right">{{ comment.create_at|date:"d M Y" }}</span>
+                                        </h4>
+                                        <p>{{ comment.message }}</p>
+                                        <p class="star">
+                                            <span class="text-left"><a href="#" class="reply"><i
+                                                    class="icon-reply2"></i></a></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 animate-box">
+                                <h2 class="heading-2">Say something</h2>
+                                <form action="{% url 'create_comment' pk=post.id %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="row form-group">
+                                        <div class="col-md-12">
+                                            <!-- <label for="message">Message</label> -->
+                                            <textarea name="message" id="message" cols="30" rows="10"
+                                                      class="form-control"
+                                                      placeholder="Say something about us"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Post Comment" class="btn btn-primary">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include 'blog/include/right_nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="colorlib-main">
+    <div class="colorlib-blog">
+        <div class="container-wrap">
+            <div class="col-md-9">
+                <div class="content-wrap">
+                    <div class="row">
+                        <div class="blog-entry-style animate-box">
+                            <div class="col-md-5">
+
+                                <div class="blog-img">
+                                    <div class="video colorlib-video"
+                                         style="background-image: url({{ profile.avatar.url }}); height: 300px; width: 300px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="desc">
+                                    <div class="meta" style="margin-bottom: 70px 15px; text-transform: unset;">
+                                        <h2>{{ profile.user }}</h2>
+                                        <hr>
+                                        {% if profile.about_me == None %}
+                                        <p>Статус: не установлен</p>
+                                        <hr>
+                                        {% else %}
+                                        <p>Статус: {{ profile.status }}</p>
+                                        <hr>
+                                        {% endif %}
+                                        <p>Date of birth: {{ profile.date_of_birth }}</p>
+                                        <hr>
+                                        <p><a href="{% url 'post_list_user_url' pk=profile.pk %}"> Post Author: {{ count_post }}</a>
+                                        </p>
+                                        <hr>
+                                        <p>Email: {{ profile.user.email }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin: 50px 5px;">
+                                <h1>О пользователе</h1>
+                                {% if profile.about_me == None %}
+                                <p>Автор ничего не указал</p>
+                                {% else %}
+                                <p>{{ profile.about_me }}</p>
+                                {% endif %}
+                            </div>
+                            {% if logout == 1 %}
+                            <div class="form-group">
+                                <a href="{% url 'addpost' %}"><input type="submit" value="Add post" class="btn btn-primary"></a>
+                            </div>
+                            <div class="form-group">
+                                <a href="{% url 'logout' %}"><input type="submit" value="Logout"
+                                                                      class="btn btn-primary" style="float: right"></a>
+                            </div>
+                            <div class="form-group">
+                                <a href="{% url 'update_profile'%}"><input type="submit" value="Editor" class="btn btn-primary"></a>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% include 'blog/include/right_nav.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

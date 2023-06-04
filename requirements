@@ -1,0 +1,10 @@
+Package              Version
+-------------------- -------
+asgiref              3.7.2
+debug-tools          2.6.20
+Django               4.2.1
+django-debug-toolbar 4.1.0
+Pillow               9.5.0
+pip                  22.3.1
+setuptools           65.5.0
+sqlparse             0.4.4

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load postview_tag %}
+{% block content %}
+<div id="colorlib-main">
+    <div class="colorlib-blog">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="side animate-box">
+                    <div class="form-group">
+                        <form action="{% url 'post_search' %}" method="get">
+                        <input type="text" name="search" class="form-control" id="search" placeholder="Enter to search...">
+                        <button type="submit" class="btn submit btn-primary"><i class="icon-search3"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="content-wrap">
+                    {% for post in posts %}
+                    <article class="blog-entry-travel animate-box">
+                        <div class="blog-img" style="background-image: url({{post.image.url}});"></div>
+                        <div class="desc">
+                            <p class="meta">
+                                <span class="cat"><a href="{% url 'post_list_url' slug=post.category.slug%}">{{ post.category }}</a></span>
+                                <span class="date">{{post.create_at|date:" d M Y "}}</span>
+                                <span class="pos">By {{ post.author }}</span>
+                            </p>
+                            {% strong_text post.name|truncatewords:7 search_words as search%}
+                            <h2><a href="{{ post.get_absolute_url }}">{{ search|safe }}</a></h2>
+                            <p>{{ post.text|truncatewords:30 }}</p>
+                            <p><a href="{{ post.get_absolute_url }}" class="btn btn-primary with-arrow">Read More <i
+                                    class="icon-arrow-right22"></i></a></p>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-3 sticky-parent">
+                <div class="sidebar" id="sticky_item">
+                    <div class="side animate-box">
+                        <h2 class="sidebar-heading">Categories</h2>
+                        <p>
+                        <ul class="category">
+                            {% get_category as cat %}
+                            {% for category in cat %}
+                            <li><a href="{{ category.get_absolute_url }}"><i
+                                    class="icon-check"></i>{{category.name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="side animate-box">
+                        <h2 class="sidebar-heading">Instagram</h2>
+                        <div class="instagram-entry">
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-1.jpg' %});">
+                            </a>
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-2.jpg' %});">
+                            </a>
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-3.jpg' %});">
+                            </a>
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-4.jpg' %});">
+                            </a>
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-5.jpg' %});">
+                            </a>
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-6.jpg' %});">
+                            </a>
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-7.jpg' %});">
+                            </a>
+                            <a href="#" class="instagram text-center"
+                               style="background-image: url({% static 'images/gallery-8.jpg' %});">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="side animate-box">
+                        <div class="form-group">
+                            <form method="post" action="#">
+                                {% csrf_token %}
+                                <input type="text" name="email" class="form-control form-email text-center"
+                                       id="email"
+                                       placeholder="Enter your email">
+                                <button type="submit" class="btn btn-primary btn-subscribe">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

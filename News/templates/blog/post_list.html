@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load postview_tag %}
+{% block content %}
+<div id="colorlib-page">
+    <div id="colorlib-main">
+        <div class="colorlib-blog">
+            <div class="container-wrap">
+                <div class="row">
+                    <div class="col-md-9">
+                    <h1>{{title}}</h1>
+                    {% for post in posts %}
+                    <div class="col-md-4">
+                        <div class="blog-entry animate-box">
+                            <div class="blog-img" style="background-image: url({{post.image.url}});">
+                                <div class="desc text-center">
+                                    <p class="tag"><span>{{post.category}}</span></p>
+                                    <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|slice:":30"}}</a></h2>
+                                    <p>{{post.text|slice:":100"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                    {% include 'blog/include/right_nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

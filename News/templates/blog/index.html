@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load postview_tag %}
+{% block content %}
+<div id="colorlib-page">
+    <div id="colorlib-main">
+        <aside id="colorlib-hero" class="js-fullheight">
+            <div class="flexslider js-fullheight">
+                <ul class="slides">
+                    {% get_first_post as getf %}
+                    {% get_last_post as getl %}
+                    <li style="background-image: url({{ getf.image.url }});">
+                        <div class="overlay"></div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12 js-fullheight slider-text">
+                                    <div class="slider-text-inner">
+                                        <div class="desc">
+                                            <p class="tag"><span>{{ getf.category }}</span></p>
+                                            <h1><a href="{{ getf.get_absolute_url }}">{{ getf.name }}</a></h1>
+                                            <p>{{ getf.text|truncatewords:15 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="background-image: url({{ getl.image.url }});">
+                        <div class="overlay"></div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12 js-fullheight slider-text">
+                                    <div class="slider-text-inner">
+                                        <div class="desc">
+                                            <p class="tag"><span>{{ getl.category }}</span></p>
+                                            <h1><a href="{{ getl.get_absolute_url }}">{{ getl.name }}</a></h1>
+                                            <p>{{ getl.text|truncatewords:15 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="colorlib-blog">
+            <div class="container-wrap">
+                <div class="row">
+                    {% for post in posts %}
+                    {% if forloop.counter == 1 %}
+                    <div class="col-md-6">
+                        <div class="blog-entry animate-box">
+                            <div class="blog-img" style="background-image: url({{post.image.url}});">
+                                <div class="desc text-center">
+                                    <p class="tag"><span>{{post.category}}</span></p>
+                                    <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a></h2>
+                                    <p>{{post.text|truncatewords:15}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if forloop.counter >= 2 and forloop.counter <= 4 %}
+
+                    {% if forloop.counter == 2 %}
+                    <div class="col-md-6">
+                        <div class="row">
+                            {% endif %}
+                            {% if forloop.counter != 4 %}
+                            <div class="col-md-6">
+                                <div class="blog-entry animate-box">
+                                    <div class="blog-img blog-img2" style="background-image: url({{post.image.url}});">
+                                        <div class="desc text-center">
+                                            <p class="tag"><span>{{post.category}}</span></p>
+                                            <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a>
+                                            </h2>
+                                            <p>{{post.text|truncatewords:7}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-12">
+                                <div class="blog-entry animate-box">
+                                    <div class="blog-img blog-img2" style="background-image: url({{post.image.url}});">
+                                        <div class="desc text-center">
+                                            <p class="tag"><span>{{post.category}}</span></p>
+                                            <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a>
+                                            </h2>
+                                            <p>{{post.text|truncatewords:15}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            {% if forloop.counter == 4 %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if forloop.counter >= 5 and forloop.counter <= 7 %}
+                    <div class="col-md-4">
+                        <div class="blog-entry animate-box">
+                            <div class="blog-img" style="background-image: url({{post.image.url}});">
+                                <div class="desc text-center">
+                                    <p class="tag"><span>{{post.category}}</span></p>
+                                    <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a></h2>
+                                    <p>{{post.text|truncatewords:15}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if forloop.counter == 8 %}
+                    <div class="col-md-5">
+                        <div class="blog-entry animate-box">
+                            <div class="blog-img" style="background-image: url({{post.image.url}});">
+                                <div class="desc text-center">
+                                    <p class="tag"><span>{{post.category}}</span></p>
+                                    <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a></h2>
+                                    <p>{{post.text|truncatewords:15}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if forloop.counter == 9 or forloop.counter == 10 %}
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="blog-entry animate-box">
+                                    <div class="blog-img blog-img2" style="background-image: url({{post.image.url}});">
+                                        <div class="desc text-center">
+                                            <p class="tag"><span>{{post.category}}</span></p>
+                                            <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a>
+                                            </h2>
+                                            <p>{{post.text|truncatewords:15}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if forloop.counter >= 11 and forloop.counter <= 13 %}
+                    {% if forloop.counter == 11 %}
+                    <div class="col-md-6">
+                        <div class="row">
+                            {% endif %}
+                            {% if forloop.counter != 13 %}
+                            <div class="col-md-6">
+                                <div class="blog-entry animate-box">
+                                    <div class="blog-img blog-img2" style="background-image: url({{post.image.url}});">
+                                        <div class="desc text-center">
+                                            <p class="tag"><span>{{post.category}}</span></p>
+                                            <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a>
+                                            </h2>
+                                            <p>{{post.text|truncatewords:7}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-12">
+                                <div class="blog-entry animate-box">
+                                    <div class="blog-img blog-img2" style="background-image: url({{post.image.url}});">
+                                        <div class="desc text-center">
+                                            <p class="tag"><span>{{post.category}}</span></p>
+                                            <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a>
+                                            </h2>
+                                            <p>{{post.text|truncatewords:15}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if forloop.counter == 13 %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {% if forloop.counter == 14 %}
+                    <div class="col-md-6">
+                        <div class="blog-entry animate-box">
+                            <div class="blog-img" style="background-image: url({{post.image.url}});">
+                                <div class="desc text-center">
+                                    <p class="tag"><span>{{post.category}}</span></p>
+                                    <h2 class="head-article"><a href="{{ post.get_absolute_url }}">{{post.name|truncatewords:5}}</a></h2>
+                                    <p>{{post.text|truncatewords:15}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
